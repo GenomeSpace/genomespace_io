@@ -15,11 +15,10 @@ from io import StringIO
 
 class GenomeSpaceIO() :
     
-    
-     def __init__(self, gsuser, gspass):
+     def __init__(self, gsuser=None, gspass=None):
         if ((len(gsuser) == 0 ) or (len(gspass) == 0)):
             raise Exception("GenomeSpace Username or password is missing for some odd reason.")
-            return
+
         # save the username, we'll ened it for uploads (possibly) but not the password    
         self.gsusername = gsuser
         # set up a cookie jar to have a gs-token cookie after login.  The cookie will authenticate subsequent
@@ -29,7 +28,9 @@ class GenomeSpaceIO() :
         
         
      def login(self, apass):
-         
+         """
+         klkjjj
+         """
          url = "https://"+self.gsusername + ":" + apass + "@identity.genomespace.org/identityServer/selfmanagement/user"
          response = requests.get(url)
                 
@@ -57,7 +58,7 @@ class GenomeSpaceIO() :
                     #f.flush() commented by recommendation from J.F.Sebastian
         return local_filename    
          
-     def __getFileSize(self, filename):
+     def __get_file_size(self, filename):
         fileobject = open(filename, 'rb')
         fileobject.seek(0,2) # move the cursor to the end of the file
         size = fileobject.tell()
@@ -99,7 +100,7 @@ class GenomeSpaceIO() :
         #
         #     delimiter:   GCT files are tab-separated
         #     header:      This line contains the column headers
-        return pandas.read_csv(data_io, delimiter='\t', header=2, index_col=0)
+        return pandas.read_csv(data_io, delimiter='\t', header=2, index_col=[0,1], skip_blank_lines=True)
         
 
         
