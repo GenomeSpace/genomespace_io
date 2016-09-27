@@ -1,2 +1,2 @@
-from gsio_main import GenomeSpaceIO
+from genomespaceio.gsio_main import GenomeSpaceIO
 
