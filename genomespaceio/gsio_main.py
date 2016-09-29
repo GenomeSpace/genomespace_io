@@ -3,7 +3,7 @@
 This module lets you login to GenomeSpace, upload and download files. For sonme files (gct and things that can convert to it)
 it lets you get the contents as a Pandas data frame
 """
-__version__ = '0.1'
+__version__ = '0.14'
 __author__ = 'Ted Liefeld'
 
 
@@ -16,9 +16,9 @@ from io import StringIO
 class GenomeSpaceIO() :
     
      def __init__(self, gsuser=None, gspass=None):
-        if ((len(gsuser) == 0 ) or (len(gspass) == 0)):
+        if ((gsuser == None ) or (gspass == None)):
             raise Exception("GenomeSpace Username or password is missing for some odd reason.")
-
+  
         # save the username, we'll ened it for uploads (possibly) but not the password    
         self.gsusername = gsuser
         # set up a cookie jar to have a gs-token cookie after login.  The cookie will authenticate subsequent
